@@ -10,5 +10,6 @@ int main()
   for(int i = 0; i<10; i++)
   {
     camera.SaveImage();
+    sleep(2);
   }
 }
