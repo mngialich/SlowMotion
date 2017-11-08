@@ -4,10 +4,12 @@
 #include <fstream>
 #include <iostream>
 #include <thread>
+#include <sstream>
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 Camera::Camera():
-  stabalization_time{3}
+  stabalization_time{3},
+  image_counter{0}
 {
   Open();
 }
@@ -16,12 +18,19 @@ Camera::Camera():
 //------------------------------------------------------------------------------
 void Camera::SaveImage(void)
 {
+ camera.grab();
+       
   unsigned char *data = new unsigned char
     [camera.getImageTypeSize(raspicam::RASPICAM_FORMAT_RGB)];
 
   camera.retrieve(data,raspicam::RASPICAM_FORMAT_RGB);
 
-  std::ofstream outFile("raspicam_image.ppm",std::ios::binary );
+  std::ostringstream file_name;
+  file_name << "Image" << image_counter << ".ppm";
+  
+  image_counter++;
+  
+  std::ofstream outFile(file_name.str(),std::ios::binary );
   outFile<<"P6\n"<<camera.getWidth() <<" "<<camera.getHeight() <<" 255\n";
   outFile.write((char*) data, camera.getImageTypeSize(raspicam::RASPICAM_FORMAT_RGB));
 

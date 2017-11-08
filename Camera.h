@@ -13,4 +13,5 @@ private:
   raspicam::RaspiCam camera;
 
   int stabalization_time;
+  int image_counter;
 };
