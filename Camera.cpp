@@ -14,8 +14,8 @@ Camera::Camera():
   width{0}
 {
   Open();
-  get_width();
-  get_heigth();
+  set_width();
+  set_height();
 }
 
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ void Camera::SaveImage(void)
 
   image_counter++;
 
-  write_file(file_name.str());
+  write_file(file_name.str(),data);
 
   delete data;
 }
@@ -57,9 +57,9 @@ void Camera::Open()
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-void Camera::write_file(std::string file_name)
+void Camera::write_file(std::string file_name,unsigned char* data)
 {
   std::ofstream outFile(file_name,std::ios::binary );
   outFile<<"P6\n"<<width <<" "<<height <<" 255\n";
-  outFile.write((char*) data, get_image_size;
+  outFile.write((char*) data, get_image_size());
 }

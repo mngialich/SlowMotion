@@ -1,5 +1,5 @@
 #include <raspicam/raspicam.h>
-
+#include <string>
 class Camera
 {
 public:
@@ -10,9 +10,11 @@ public:
 private:
   void Open();
 
-  void set_height();
+  void write_file(std::string file,unsigned char* data);
+
+  void set_height()
   {
-    height = camera.getHeight()
+    height = camera.getHeight();
   }
 
   void set_width()
@@ -22,7 +24,7 @@ private:
 
   int get_image_size()
   {
-    return(camera.getImageTypeSize(raspicam::RASPICAM_FORMAT_RGB)))
+    return(camera.getImageTypeSize(raspicam::RASPICAM_FORMAT_RGB));
   }
 
   raspicam::RaspiCam camera;

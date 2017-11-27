@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-#include<iostream>
+#include <iostream>
+#include <unistd.h>
 
 int main()
 {
